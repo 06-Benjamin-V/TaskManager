@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">TaskManager</string>
+
+    <!--Main Activity-->
+
+    <string name="Btn_login">Login</string>
+    <string name="Btn_registro">Register</string>
+
+
+    <!--Actividad registro-->
+
+    <string name="CrearCuentaTXT">Crear una Cuenta</string>
+    <string name="NombreET">Nombre</string>
+    <string name="CorreoET">Correo electronico</string>
+    <string name="ContraseniaET">Cotraseña</string>
+    <string name="ConfirmarContraseniaET">Confirmar Contraseña</string>
+    <string name="RegistrarUsuarioET">Registrar</string>
+    <string name="TengoUnaCuetaET">Tengo una Cuenta</string>
 </resources>
