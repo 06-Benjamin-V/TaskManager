@@ -121,6 +121,7 @@ public class Register extends AppCompatActivity {
         datos.put("uid", uid);
         datos.put("correo", correo);
         datos.put("nombres", nombre);
+        datos.put("contraseña",contrasenia);
 
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection("Usuarios").document(uid)
@@ -131,7 +132,7 @@ public class Register extends AppCompatActivity {
                         progressDialog.dismiss();
                         Toast.makeText(Register.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Register.this, MenuPrincipal.class));
-                        finish(); // Terminar esta actividad para evitar problemas de pila
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

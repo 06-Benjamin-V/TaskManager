@@ -16,4 +16,20 @@
     <string name="ConfirmarContraseniaET">Confirmar Contraseña</string>
     <string name="RegistrarUsuarioET">Registrar</string>
     <string name="TengoUnaCuetaET">Tengo una Cuenta</string>
+
+    <!--Menu Principal-->
+    <string name="cerrarSesion">Salir</string>
+
+    <!--Actividad Login-->
+    <string name="iniciarSesionTXT">Iniciar Sesion</string>
+    <string name="correoLogin">Correo</string>
+    <string name="contraseniaLogin">Contraseña</string>
+    <string name="btn_login">Ingresar</string>
+    <string name="usuarioNuevoTXT">Si no Tienes una Cuenta, Registrate Aqui</string>
+
+    <!--Menu Principal-->
+    <string name="bienvenidoPrincipal">Bienvenido(a)</string>
+    <string name="nombresPrincipal">--</string>
+    <string name="correoPrincipal">--</string>
+
 </resources>
