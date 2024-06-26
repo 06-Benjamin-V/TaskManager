@@ -32,4 +32,6 @@
     <string name="nombresPrincipal">--</string>
     <string name="correoPrincipal">--</string>
 
+    <string name="agregarNota">+</string>
+
 </resources>
