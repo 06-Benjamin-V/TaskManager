@@ -62,13 +62,41 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.cardview.widget.CardView>
-        <Button
-                android:id="@+id/cerrarSesion"
-                android:text="@string/cerrarSesion"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
+        <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/bottomToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary">
+                <Button
+                        android:id="@+id/cerrarSesion"
+                        android:text="@string/cerrarSesion"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icono_tarea"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:drawablePadding="8dp"
+                />
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icono_calendario"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:drawablePadding="8dp"
+                />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

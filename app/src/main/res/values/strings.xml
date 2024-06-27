@@ -18,7 +18,7 @@
     <string name="TengoUnaCuetaET">Tengo una Cuenta</string>
 
     <!--Menu Principal-->
-    <string name="cerrarSesion">Salir</string>
+    <string name="cerrarSesion">Cerrar Sesion</string>
 
     <!--Actividad Login-->
     <string name="iniciarSesionTXT">Iniciar Sesion</string>
