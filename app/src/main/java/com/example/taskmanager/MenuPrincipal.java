@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 public class MenuPrincipal extends AppCompatActivity {
 
     Button cerrarSesion;
+    Button calendario;
+    Button tareas;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
 
@@ -29,6 +32,7 @@ public class MenuPrincipal extends AppCompatActivity {
     FirebaseFirestore usuarios;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,8 @@ public class MenuPrincipal extends AppCompatActivity {
         correoPrincipal=findViewById(R.id.correoPrincipal);
         progressBarDatos = findViewById(R.id.progressBarDatos);
         cerrarSesion=findViewById(R.id.cerrarSesion);
+        tareas=findViewById(R.id.iconoTarea);
+        calendario=findViewById(R.id.iconoCalendario);
 
         usuarios= FirebaseFirestore.getInstance().collection("Usuarios").getFirestore();
         firebaseAuth=FirebaseAuth.getInstance();
@@ -57,6 +63,19 @@ public class MenuPrincipal extends AppCompatActivity {
                 SalirAplicacion();
             }
         });
+        tareas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MenuPrincipal.this,TareasActivity.class));
+            }
+        });
+        calendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuPrincipal.this,CalendarioActivity.class));
+            }
+        });
+
     }
 
     @Override
@@ -106,4 +125,6 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
         Toast.makeText(this,"Cerraste sesion exitosamente",Toast.LENGTH_LONG).show();
     }
+
+
 }

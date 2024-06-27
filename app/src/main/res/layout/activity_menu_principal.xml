@@ -80,6 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <Button
+                        android:id="@+id/iconoTarea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/icono_tarea"
@@ -87,6 +88,7 @@
                         android:drawablePadding="8dp"
                 />
                 <Button
+                        android:id="@+id/iconoCalendario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/icono_calendario"
