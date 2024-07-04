@@ -64,6 +64,7 @@
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.appbar.AppBarLayout
+                android:paddingTop="545dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom">
