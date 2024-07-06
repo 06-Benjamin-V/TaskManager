@@ -1,5 +1,3 @@
-package com.example.taskmanager;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -13,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.taskmanager.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

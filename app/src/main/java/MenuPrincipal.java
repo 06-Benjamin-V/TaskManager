@@ -1,5 +1,3 @@
-package com.example.taskmanager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
@@ -11,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.taskmanager.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
