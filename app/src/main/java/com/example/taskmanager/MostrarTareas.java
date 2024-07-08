@@ -1,13 +1,13 @@
 package com.example.taskmanager;
 
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class TareasActivity extends AppCompatActivity {
+public class MostrarTareas extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tareas);
+        setContentView(R.layout.activity_mostrar_tareas);
     }
 }

@@ -45,10 +45,16 @@ dependencies {
 
     implementation ("com.google.firebase:firebase-auth:23.0.0")
     implementation ("com.google.firebase:firebase-firestore-ktx:25.0.0")
+    implementation ("com.firebaseui:firebase-ui-firestore:8.0.0")
+
 
     implementation ("com.google.api-client:google-api-client:2.0.0")
     implementation ("com.google.apis:google-api-services-calendar:v3-rev20220715-2.0.0")
     implementation("com.google.oauth-client:google-oauth-client-jetty:1.34.1")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    implementation("com.google.api-client:google-api-client-android:1.30.9")
+
 }
 
 

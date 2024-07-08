@@ -1,6 +1,5 @@
 package com.example.taskmanager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,31 +7,29 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
+import com.example.taskmanager.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import org.jetbrains.annotations.NotNull;
 
 public class MenuPrincipal extends AppCompatActivity {
 
     Button cerrarSesion;
-    Button calendario;
     Button tareas;
+    Button agregarTarea;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
 
-    TextView nombresPrincipal,correoPrincipal;
+    TextView nombresPrincipal, correoPrincipal;
     ProgressBar progressBarDatos;
-    FirebaseFirestore usuarios;
+    FirebaseFirestore db;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,17 +42,16 @@ public class MenuPrincipal extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
         }
 
-
-        nombresPrincipal=findViewById(R.id.nombresPrincipal);
-        correoPrincipal=findViewById(R.id.correoPrincipal);
+        nombresPrincipal = findViewById(R.id.nombresPrincipal);
+        correoPrincipal = findViewById(R.id.correoPrincipal);
         progressBarDatos = findViewById(R.id.progressBarDatos);
-        cerrarSesion=findViewById(R.id.cerrarSesion);
-        tareas=findViewById(R.id.iconoTarea);
-        calendario=findViewById(R.id.iconoCalendario);
+        cerrarSesion = findViewById(R.id.cerrarSesion);
+        tareas = findViewById(R.id.tareas);
+        agregarTarea = findViewById(R.id.agregarTarea);
 
-        usuarios= FirebaseFirestore.getInstance().collection("Usuarios").getFirestore();
-        firebaseAuth=FirebaseAuth.getInstance();
-        user=firebaseAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,68 +59,74 @@ public class MenuPrincipal extends AppCompatActivity {
                 SalirAplicacion();
             }
         });
-        tareas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(MenuPrincipal.this,TareasActivity.class));
-            }
-        });
-        calendario.setOnClickListener(new View.OnClickListener() {
+
+        agregarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuPrincipal.this,CalendarioActivity.class));
+                startActivity(new Intent(MenuPrincipal.this, AgregarTarea.class));
             }
         });
 
+        tareas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(MenuPrincipal.this, MostrarTareas.class));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(MenuPrincipal.this, "Error al abrir la actividad de tareas", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     protected void onStart() {
-        comprobarInicioSesion();
         super.onStart();
+        comprobarInicioSesion();
     }
 
-    private void comprobarInicioSesion(){
-        if(firebaseAuth.getCurrentUser()!=null){
+    private void comprobarInicioSesion() {
+        if (firebaseAuth.getCurrentUser() != null) {
             cargarDatos();
-        }else {
-            startActivity(new Intent(MenuPrincipal.this,MainActivity.class));
+        } else {
+            startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
             finish();
         }
     }
 
-    private void cargarDatos(){
-        usuarios.collection("Usuarios").document(user.getUid())
+    private void cargarDatos() {
+        db.collection("Usuarios").document(user.getUid())
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
                             progressBarDatos.setVisibility(View.GONE);
                             nombresPrincipal.setVisibility(View.VISIBLE);
                             correoPrincipal.setVisibility(View.VISIBLE);
 
-                            String nombre=documentSnapshot.getString("nombres");
-                            String correo=documentSnapshot.getString("correo");
+                            String nombre = document.getString("nombres");
+                            String correo = document.getString("correo");
 
                             nombresPrincipal.setText(nombre);
                             correoPrincipal.setText(correo);
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Toast.makeText(MenuPrincipal.this,"Error al obtener los datos"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MenuPrincipal.this, "Error al obtener los datos: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-
     private void SalirAplicacion() {
         firebaseAuth.signOut();
         startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
-        Toast.makeText(this,"Cerraste sesion exitosamente",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Cerraste sesión exitosamente", Toast.LENGTH_LONG).show();
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

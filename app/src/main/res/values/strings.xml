@@ -31,7 +31,27 @@
     <string name="bienvenidoPrincipal">Bienvenido(a)</string>
     <string name="nombresPrincipal">--</string>
     <string name="correoPrincipal">--</string>
+    <string name="tareas">tareas</string>
 
-    <string name="agregarNota">+</string>
+    <string name="titulo">Titulo</string>
+    <string name="descripcion">Descripcion</string>
+
+    <string-array name="opciones_Tipo_Tarea">
+        <item>Seleccion el tipo de tarea</item>
+        <item>Tarea</item>
+        <item>Prueba</item>
+        <item>Evento</item>
+    </string-array>
+
+    <string name="btn_Calendario">Calendario</string>
+    <string name="fecha">00/00/0000</string>
+    <string name="estado">No finalizado</string>
+    <string name="agregarTarea">Agregar Tarea</string>
+
+    <string name="btn_guardarTarea">Guardar</string>
+
+
+    <string name="id_tarea">ID Tarea: %1$s</string>
+
 
 </resources>

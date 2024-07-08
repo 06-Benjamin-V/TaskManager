@@ -64,7 +64,6 @@
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.cardview.widget.CardView>
@@ -93,21 +92,19 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+            <Button
+                    android:id="@+id/agregarTarea"
+                    android:text="@string/agregarTarea"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             <Button
-                    android:id="@+id/iconoTarea"
+                    android:id="@+id/tareas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icono_tarea"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:drawablePadding="8dp"/>
-
-            <Button
-                    android:id="@+id/iconoCalendario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icono_calendario"
-                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="@color/white"
+                    android:text="@string/tareas"
                     android:drawablePadding="8dp"/>
 
         </androidx.appcompat.widget.Toolbar>
