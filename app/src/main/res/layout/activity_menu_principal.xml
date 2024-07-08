@@ -65,8 +65,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
-
         </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_marginTop="50dp"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+            <CalendarView
+                    android:id="@+id/calendarioMenuPrincipal"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

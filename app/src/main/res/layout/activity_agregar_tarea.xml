@@ -45,6 +45,7 @@
         <Button
                 android:id="@+id/btn_fecha_hora_inicio"
                 android:text="Seleccionar Fecha y Hora de Inicio"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -61,6 +62,7 @@
         <Button
                 android:id="@+id/btn_fecha_hora_termino"
                 android:text="Seleccionar Fecha y Hora de Término"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

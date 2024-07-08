@@ -3,20 +3,21 @@ package com.example.taskmanager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.taskmanager.MainActivity;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.Calendar;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -25,10 +26,13 @@ public class MenuPrincipal extends AppCompatActivity {
     Button agregarTarea;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    CalendarView calendarioMenuPrincipal;
 
     TextView nombresPrincipal, correoPrincipal;
     ProgressBar progressBarDatos;
     FirebaseFirestore db;
+
+    String uidUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class MenuPrincipal extends AppCompatActivity {
         cerrarSesion = findViewById(R.id.cerrarSesion);
         tareas = findViewById(R.id.tareas);
         agregarTarea = findViewById(R.id.agregarTarea);
+        calendarioMenuPrincipal = findViewById(R.id.calendarioMenuPrincipal);
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
