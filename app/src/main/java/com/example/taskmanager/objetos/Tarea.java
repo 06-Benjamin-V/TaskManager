@@ -1,12 +1,12 @@
 package com.example.taskmanager.objetos;
-
-import com.google.type.DateTime;
-
 public class Tarea {
     private String titulo;
     private String descripcion;
     private String fechaHoraInicio;
     private String fechaHoraFin;
+    public Tarea(){
+
+    }
 
     public Tarea(String titulo, String descripcion, String fechaHoraInicio, String fechaHoraFin) {
         this.titulo = titulo;

@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +23,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.CalendarScopes;
@@ -79,16 +76,16 @@ public class AgregarTarea extends AppCompatActivity {
         googleAccountCredential = GoogleAccountCredential.usingOAuth2(
                 this, Collections.singleton(CalendarScopes.CALENDAR));
 
-        db=FirebaseFirestore.getInstance();
-        auth=FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         fechayHoraInicioTXT = findViewById(R.id.fechayHoraInicioTXT);
         fechaYHoraTerminoTXT = findViewById(R.id.fechaYHoraTerminoTXT);
         btn_fecha_hora_inicio = findViewById(R.id.btn_fecha_hora_inicio);
         btn_fecha_hora_termino = findViewById(R.id.btn_fecha_hora_termino);
         btn_guardarTarea = findViewById(R.id.btn_guardarTarea);
-        tituloTarea=findViewById(R.id.titulo);
-        descripcionTarea=findViewById(R.id.descripcion);
+        tituloTarea = findViewById(R.id.titulo);
+        descripcionTarea = findViewById(R.id.descripcion);
 
         btn_fecha_hora_inicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,8 +115,8 @@ public class AgregarTarea extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        int minuto = calendar.get(Calendar.MINUTE);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, yearSelected, monthOfYear, dayOfMonth) -> {
@@ -155,17 +152,17 @@ public class AgregarTarea extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private void guardarTareasEnFirestore(){
+    private void guardarTareasEnFirestore() {
         String titulo = tituloTarea.getText().toString();
         String descripcion = descripcionTarea.getText().toString();
-        String fechaInicio= fechayHoraInicioTXT.getText().toString();
-        String fechaTermino= fechaYHoraTerminoTXT.getText().toString();
+        String fechaInicio = fechayHoraInicioTXT.getText().toString();
+        String fechaTermino = fechaYHoraTerminoTXT.getText().toString();
 
-        String userId= auth.getCurrentUser().getUid();
+        String userId = auth.getCurrentUser().getUid();
 
-        Tarea tarea = new Tarea(titulo,descripcion,fechaInicio,fechaTermino);
+        Tarea tarea = new Tarea(titulo, descripcion, fechaInicio, fechaTermino);
 
-        CollectionReference tareasRef=db.collection("Usuarios")
+        CollectionReference tareasRef = db.collection("Usuarios")
                 .document(userId)
                 .collection("Tareas");
 
@@ -173,13 +170,13 @@ public class AgregarTarea extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AgregarTarea.this,"Tarea guardada en firestore",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AgregarTarea.this, "Tarea guardada en firestore", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
-                        Toast.makeText(AgregarTarea.this,"Error al guardar en firestore "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AgregarTarea.this, "Error al guardar en firestore " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -277,13 +274,14 @@ public class AgregarTarea extends AppCompatActivity {
 
 
     private void signInWithGoogle() {
-        Intent signInIntent=googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent,REQUEST_AUTHORIZATION);
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, REQUEST_AUTHORIZATION);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==REQUEST_AUTHORIZATION && requestCode==RESULT_OK){
+        if (resultCode == REQUEST_AUTHORIZATION && requestCode == RESULT_OK) {
             guardarTareaEnGoogleCalendar();
         }
     }
