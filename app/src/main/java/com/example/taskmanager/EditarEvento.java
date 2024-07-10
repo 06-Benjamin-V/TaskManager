@@ -35,28 +35,14 @@ public class EditarEvento extends AppCompatActivity {
     Button btn_fecha_hora_inicioEditar, btn_fecha_hora_terminoEditar, btn_guardarEventoEditar;
     FirebaseFirestore db;
     FirebaseAuth auth;
-
-    private static final String TAG = "EditarTarea";
-    private static final int REQUEST_AUTHORIZATION = 1001;
-
-    private GoogleSignInClient googleSignInClient;
-    private GoogleAccountCredential googleAccountCredential;
-
     private String tituloOriginal;
+    private static final String TAG = "EditarEvento";
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_evento);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestScopes(new Scope(CalendarScopes.CALENDAR))
-                .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleAccountCredential = GoogleAccountCredential.usingOAuth2(
-                this, Collections.singleton(CalendarScopes.CALENDAR));
-
         tituloPaginaEditarTarea = findViewById(R.id.tituloPaginaEditarTarea);
         fechayHoraInicioTXTEditar = findViewById(R.id.fechayHoraInicioTXTEditarEvento);
         fechaYHoraTerminoTXTEditar = findViewById(R.id.fechaYHoraTerminoTXTEditarEvento);
@@ -89,6 +75,7 @@ public class EditarEvento extends AppCompatActivity {
         btn_guardarEventoEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actualizarEventoFirestore();
             }
         });
     }
@@ -126,45 +113,49 @@ public class EditarEvento extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private void actualizarTareaFirestore() {
+    private void actualizarEventoFirestore() {
         String titulo = tituloEditar.getText().toString();
         String descripcion = descripcionEditar.getText().toString();
         String fechaInicio = fechayHoraInicioTXTEditar.getText().toString();
         String fechaTermino = fechaYHoraTerminoTXTEditar.getText().toString();
         String userId = auth.getCurrentUser().getUid();
 
-        Evento eventoActualizada = new Evento(titulo, descripcion, fechaInicio, fechaTermino);
-        CollectionReference tareasRef = db.collection("Usuarios")
+        Evento eventoActualizado = new Evento(titulo, descripcion, fechaInicio, fechaTermino);
+
+        CollectionReference eventosRef = db.collection("Usuarios")
                 .document(userId)
-                .collection("Tareas");
-        Query query = tareasRef.whereEqualTo("titulo", tituloOriginal);
+                .collection("Eventos");
+
+        Query query = eventosRef.whereEqualTo("titulo", tituloOriginal);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String uidTareaEditar = document.getId();
+                        String eventoId = document.getId();
+                        eventoActualizado.setEventoId(eventoId);
 
-                        tareasRef.document(uidTareaEditar)
-                                .set(eventoActualizada)
+                        eventosRef.document(eventoId)
+                                .set(eventoActualizado)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(EditarEvento.this, tituloOriginal, Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(EditarEvento.this, "Tarea actualizada en Firestore", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditarEvento.this, "Evento actualizado en Firestore", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(EditarEvento.this, "Error al actualizar en Firestore " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e(TAG, "Error al actualizar evento en Firestore", e);
+                                        Toast.makeText(EditarEvento.this, "Error al actualizar evento en Firestore: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }
                 } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
+                    Log.e(TAG, "Error al obtener documentos", task.getException());
+                    Toast.makeText(EditarEvento.this, "Error al obtener documentos: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

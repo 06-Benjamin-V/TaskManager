@@ -1,5 +1,6 @@
 package com.example.taskmanager.objetos;
 public class Evento {
+    private String eventoId;
     private String titulo;
     private String descripcion;
     private String fechaHoraInicio;
@@ -31,7 +32,13 @@ public class Evento {
         return fechaHoraFin;
     }
 
+    public String getEventoId() {
+        return eventoId;
+    }
 
+    public void setEventoId(String eventoId) {
+        this.eventoId = eventoId;
+    }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;

@@ -31,9 +31,6 @@
         <activity android:name=".MostarEventos"
                   android:exported="false"/>
         <activity
-                android:name=".CalendarQuickstart"
-                android:exported="false"/>
-        <activity
                 android:name=".MenuPrincipal"
                 android:exported="false"/>
         <activity

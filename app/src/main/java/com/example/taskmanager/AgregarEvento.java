@@ -164,17 +164,14 @@ public class AgregarEvento extends AppCompatActivity {
                 .document(userId)
                 .collection("Eventos");
         tareasRef.add(evento)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AgregarEvento.this, "Tarea guardada en firestore", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Toast.makeText(AgregarEvento.this, "Error al guardar en firestore " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                .addOnSuccessListener(documentReference -> {
+                    evento.setEventoId(documentReference.getId());
+                    tareasRef.document(documentReference.getId()).set(evento);
+                    Toast.makeText(AgregarEvento.this, "Tarea guardada en firestore", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(AgregarEvento.this, "Error al guardar en firestore " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 

@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -8,6 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskmanager.objetos.Evento;
 import com.example.taskmanager.objetos.EventoAdapter;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,7 +30,6 @@ public class MostarEventos extends AppCompatActivity {
     private List<Evento> listaEventos;
 
     private TextView tituloPaginaEventos;
-
     FirebaseAuth auth;
 
     @Override
@@ -62,4 +68,5 @@ public class MostarEventos extends AppCompatActivity {
                     Log.e(TAG, "Error al Obtener los Eventos del Usuario", e);
                 });
     }
+
 }
