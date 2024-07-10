@@ -55,6 +55,10 @@ dependencies {
 
     implementation("com.google.api-client:google-api-client-android:1.30.9")
 
+    implementation ("androidx.test.ext:junit:1.1.5")
+    implementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("androidx.test:rules:1.5.0")
+
 }
 
 
