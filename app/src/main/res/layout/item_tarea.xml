@@ -14,33 +14,22 @@
             android:padding="16dp">
 
         <TextView
-                android:id="@+id/textViewTitulo"
-                android:textColor="@color/white"
+                android:id="@+id/textViewTituloTarea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
         <TextView
-                android:id="@+id/textViewDescripcion"
+                android:id="@+id/textViewDescripcionTarea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"/>
-        <TextView
-                android:id="@+id/mostrarFechafin"
-                android:text="Fecha termino"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        <TextView
-                android:id="@+id/textViewFecha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textStyle="italic"/>
-
+        <CheckBox
+                android:id="@+id/checkboxCompletarTareaTarea"
+                android:text="Completar Tarea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
-

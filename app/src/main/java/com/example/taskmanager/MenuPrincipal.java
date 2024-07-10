@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,23 +8,23 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.taskmanager.MainActivity;
-import com.google.firebase.Timestamp;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import java.util.Calendar;
 
 public class MenuPrincipal extends AppCompatActivity {
 
     Button cerrarSesion;
-    Button tareas;
-    Button agregarTarea;
+    Button btnVerTareas;
+    Button btnAgregarTarea;
+    Button btnVerEventos;
+    Button btnAgregarEvento;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     CalendarView calendarioMenuPrincipal;
@@ -32,8 +33,8 @@ public class MenuPrincipal extends AppCompatActivity {
     ProgressBar progressBarDatos;
     FirebaseFirestore db;
 
-    String uidUsuario;
-
+    GoogleApiClient googleApiClient;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +51,42 @@ public class MenuPrincipal extends AppCompatActivity {
         correoPrincipal = findViewById(R.id.correoPrincipal);
         progressBarDatos = findViewById(R.id.progressBarDatos);
         cerrarSesion = findViewById(R.id.cerrarSesion);
-        tareas = findViewById(R.id.tareas);
-        agregarTarea = findViewById(R.id.agregarTarea);
         calendarioMenuPrincipal = findViewById(R.id.calendarioMenuPrincipal);
+
+        btnVerTareas = findViewById(R.id.btnVerTareas);
+        btnVerEventos=findViewById(R.id.btnVerEventos);
+        btnAgregarTarea=findViewById(R.id.btnAgregarTarea);
+        btnAgregarEvento=findViewById(R.id.btnAgregarEvento);
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .build();
+        googleApiClient.connect();
+
+        calendarioMenuPrincipal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                mostrarDialogoCrearEvento();
+            }
+
+            private void mostrarDialogoCrearEvento() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this,R.style.AlertDialogTheme);
+                builder.setTitle("Crear Evento");
+                builder.setMessage("¿Desea Crear un Evento?");
+                builder.setPositiveButton("Si", (dialog, which) -> {
+                    Intent intent = new Intent(MenuPrincipal.this, AgregarEvento.class);
+                    startActivity(intent);
+                });
+                builder.setNegativeButton("No", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+                builder.create().show();
+            }
+        });
 
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,22 +95,42 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-        agregarTarea.setOnClickListener(new View.OnClickListener() {
+        btnAgregarEvento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuPrincipal.this, AgregarEvento.class));
+            }
+        });
+
+        btnVerEventos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(MenuPrincipal.this, MostarEventos.class));
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(MenuPrincipal.this, "No se puede abrir eventos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnAgregarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuPrincipal.this, AgregarTarea.class));
             }
         });
 
-        tareas.setOnClickListener(new View.OnClickListener() {
+        btnVerTareas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    startActivity(new Intent(MenuPrincipal.this, MostrarTareas.class));
-                } catch (Exception e) {
+                    startActivity(new Intent(MenuPrincipal.this,MostarTareas.class));
+                }catch (Exception e){
                     e.printStackTrace();
                     Toast.makeText(MenuPrincipal.this, "Error al abrir la actividad de tareas", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }
@@ -125,8 +175,15 @@ public class MenuPrincipal extends AppCompatActivity {
 
     private void SalirAplicacion() {
         firebaseAuth.signOut();
-        startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
-        Toast.makeText(this, "Cerraste sesión exitosamente", Toast.LENGTH_LONG).show();
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(status -> {
+            if (status.isSuccess()) {
+                Toast.makeText(MenuPrincipal.this, "Cerraste sesión exitosamente", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(MenuPrincipal.this, "Error al cerrar sesión en Google", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".AgregarTarea">
-
     <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp" tools:ignore="MissingConstraints">
+        <TextView
+                android:id="@+id/tituloPaginaAgregarTarea"
+                android:text="Agregar Tarea"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         <!-- Editar Título -->
         <EditText
-                android:id="@+id/titulo"
-                android:hint="@string/titulo"
+                android:id="@+id/tituloTarea"
+                android:hint="@string/tituloTarea"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
@@ -23,8 +31,8 @@
 
         <!-- Editar Descripción -->
         <EditText
-                android:id="@+id/descripcion"
-                android:hint="@string/descripcion"
+                android:id="@+id/descripcionTarea"
+                android:hint="@string/descripcionTarea"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:minHeight="150dp"
@@ -32,41 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        <!-- Fecha y Hora de Inicio -->
-        <TextView
-                android:id="@+id/fechayHoraInicioTXT"
-                android:text="00/00/0000 00:00"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <Button
-                android:id="@+id/btn_fecha_hora_inicio"
-                android:text="Seleccionar Fecha y Hora de Inicio"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <!-- Fecha y Hora de Término -->
-        <TextView
-                android:id="@+id/fechaYHoraTerminoTXT"
-                android:text="00/00/0000 00:00"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <Button
-                android:id="@+id/btn_fecha_hora_termino"
-                android:text="Seleccionar Fecha y Hora de Término"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <!-- Botón Guardar Nota -->
         <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,8 +48,8 @@
                 android:padding="10dp">
 
             <Button
-                    android:id="@+id/btn_guardarTarea"
-                    android:text="@string/btn_guardarTarea"
+                    android:id="@+id/btnGuardarTarea"
+                    android:text="@string/btnGuardarTarea"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -84,5 +57,5 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-</ScrollView>
 
+</androidx.constraintlayout.widget.ConstraintLayout>

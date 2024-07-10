@@ -1,34 +1,49 @@
 package com.example.taskmanager.objetos;
+
 public class Tarea {
-    private String titulo;
-    private String descripcion;
-    private String fechaHoraInicio;
-    private String fechaHoraFin;
-    public Tarea(){
+    private String id;
+    private String tituloTarea;
+    private String descripcionTarea;
+    private boolean actividad;
 
+    public Tarea() {
     }
 
-    public Tarea(String titulo, String descripcion, String fechaHoraInicio, String fechaHoraFin) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fechaHoraInicio = fechaHoraInicio;
-        this.fechaHoraFin = fechaHoraFin;
+    public Tarea(String tituloTarea, String descripcionTarea) {
+        this.tituloTarea = tituloTarea;
+        this.descripcionTarea = descripcionTarea;
+        this.actividad = true;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getId() {
+        return id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public boolean isActividad() {
+        return actividad;
     }
 
-    public String getFechaHoraInicio() {
-        return fechaHoraInicio;
+    public String getTituloTarea() {
+        return tituloTarea;
     }
 
-    public String getFechaHoraFin() {
-        return fechaHoraFin;
+    public String getDescripcionTarea() {
+        return descripcionTarea;
+    }
+
+    public void setTituloTarea(String tituloTarea) {
+        this.tituloTarea = tituloTarea;
+    }
+
+    public void setActividad(boolean actividad) {
+        this.actividad = actividad;
+    }
+
+    public void setDescripcionTarea(String descripcionTarea) {
+        this.descripcionTarea = descripcionTarea;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
-

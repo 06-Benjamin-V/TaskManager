@@ -21,6 +21,8 @@
     <string name="cerrarSesion">Cerrar Sesion</string>
 
     <!--Actividad Login-->
+    <string name="default_web_client_id">AIzaSyCIekV1NbPhib5bISTVi4JTs0ZhRiXbFlI</string>
+
     <string name="iniciarSesionTXT">Iniciar Sesion</string>
     <string name="correoLogin">Correo</string>
     <string name="contraseniaLogin">Contraseña</string>
@@ -31,13 +33,20 @@
     <string name="bienvenidoPrincipal">Bienvenido(a)</string>
     <string name="nombresPrincipal">--</string>
     <string name="correoPrincipal">--</string>
-    <string name="tareas">tareas</string>
+    <string name="btnEventos">Eventos</string>
+    <string name="btnTareas">Tareas</string>
 
-    <string name="titulo">Titulo</string>
-    <string name="descripcion">Descripcion</string>
+    <string name="tituloEvento">Titulo Evento</string>
+    <string name="descripcionEvento">Descripcion del Evento</string>
+    <string name="btnGuardarEvento">Guardar</string>
+
+
+    <string name="tituloTarea">Titulo Tarea</string>
+    <string name="descripcionTarea">Descripcion de la Tarea</string>
+    <string name="btnGuardarTarea">Guardar</string>
 
     <string-array name="opciones_Tipo_Tarea">
-        <item>Seleccion el tipo de tarea</item>
+        <item>Seleccion el tipo de evento</item>
         <item>Tarea</item>
         <item>Prueba</item>
         <item>Evento</item>
@@ -46,9 +55,10 @@
     <string name="btn_Calendario">Calendario</string>
     <string name="fecha">00/00/0000</string>
     <string name="estado">No finalizado</string>
-    <string name="agregarTarea">Agregar Tarea</string>
-
+    <string name="agregarTarea">+ Tarea</string>
+    <string name="agregarEvento">+ Evento</string>
     <string name="btn_guardarTarea">Guardar</string>
+    <string name="btn_guardarCambios">Guardar Cambios</string>
 
 
     <string name="id_tarea">ID Tarea: %1$s</string>

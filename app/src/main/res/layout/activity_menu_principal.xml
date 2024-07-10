@@ -78,6 +78,12 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+            <Button
+                    android:id="@+id/cerrarSesion"
+                    android:text="@string/cerrarSesion"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -96,30 +102,31 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-            <!-- Botones de la barra de herramientas -->
-
             <Button
-                    android:id="@+id/cerrarSesion"
-                    android:text="@string/cerrarSesion"
+                    android:id="@+id/btnVerTareas"
+                    android:text="@string/btnTareas"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
             <Button
-                    android:id="@+id/agregarTarea"
+                    android:id="@+id/btnAgregarTarea"
                     android:text="@string/agregarTarea"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
             <Button
-                    android:id="@+id/tareas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btnAgregarEvento"
+                    android:text="@string/agregarEvento"
                     android:textColor="@color/white"
-                    android:text="@string/tareas"
-                    android:drawablePadding="8dp"/>
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <Button
+                    android:id="@+id/btnVerEventos"
+                    android:text="@string/btnEventos"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

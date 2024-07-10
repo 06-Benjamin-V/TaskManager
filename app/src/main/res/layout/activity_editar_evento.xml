@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EditarEvento">
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+        <TextView
+                android:id="@+id/tituloPaginaEditarTarea"
+                android:text="Editar Tarea"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <!-- Editar Título -->
+        <EditText
+                android:id="@+id/tituloEditar"
+                android:hint="@string/tituloEvento"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <!-- Editar Descripción -->
+        <EditText
+                android:id="@+id/descripcionEditar"
+                android:hint="@string/descripcionEvento"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:minHeight="150dp"
+                android:gravity="start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <!-- Fecha y Hora de Inicio -->
+        <TextView
+                android:id="@+id/fechayHoraInicioTXTEditarEvento"
+                android:text="00/00/0000 00:00"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/btn_fecha_hora_inicioEditarEvento"
+                android:text="Seleccionar Fecha y Hora de Inicio"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <!-- Fecha y Hora de Término -->
+        <TextView
+                android:id="@+id/fechaYHoraTerminoTXTEditarEvento"
+                android:text="00/00/0000 00:00"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/btn_fecha_hora_terminoEditarEvento"
+                android:text="Seleccionar Fecha y Hora de Término"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <!-- Botón Guardar Nota -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:padding="10dp">
+
+            <Button
+                    android:id="@+id/btn_guardarEventoEditar"
+                    android:text="@string/btn_guardarCambios"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

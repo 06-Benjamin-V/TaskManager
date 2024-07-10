@@ -1,7 +1,9 @@
 package com.example.taskmanager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,15 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
-public class MostrarTareas extends AppCompatActivity {
+public class MostarTareas extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TareaAdapter tareaAdapter;
     private List<Tarea> listaTareas;
+    private TextView tituloPaginaTareas;
 
     FirebaseAuth auth;
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +34,12 @@ public class MostrarTareas extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewTareas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tituloPaginaTareas=findViewById(R.id.tituloPaginaTareas);
 
         auth = FirebaseAuth.getInstance();
 
         listaTareas = new ArrayList<>();
-        tareaAdapter = new TareaAdapter(listaTareas);
+        tareaAdapter=new TareaAdapter(listaTareas,this);
         recyclerView.setAdapter(tareaAdapter);
         obtenerTareasUsuarioDesdeFirestore();
     }
